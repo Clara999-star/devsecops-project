@@ -42,7 +42,6 @@ jobs:
 
       - name: Install Conftest
         uses: instrumenta/conftest-action@v0.3.0
-
-      - name: Run Conftest
-        run: |
-          conftest test deployment.yaml
+      -  name: Run Conftest
+         run: |
+           conftest test deployment.yaml -p policy
