@@ -9,33 +9,33 @@ jobs:
   security-scan:
     runs-on: ubuntu-latest
 
-    steps: 
-  - name: Checkout code
-    uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  - name: Set up Python
-    uses: actions/setup-python@v4
-    with:
-      python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-  - name: Install dependencies
-    run: |
-      pip install bandit
+      - name: Install dependencies
+        run: |
+          pip install bandit
 
-  - name: Build Docker image
-    run: docker build -t my-app .
+      - name: Build Docker image
+        run: docker build -t my-app .
 
-  - name: Scan dependencies (Trivy)
-    uses: aquasecurity/trivy-action@master
-    with:
-      scan-type: 'fs'
-      scan-ref: '.'
+      - name: Scan dependencies (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
 
-  - name: Scan Docker image
-    uses: aquasecurity/trivy-action@master
-    with:
-      image-ref: 'my-app'
+      - name: Scan Docker image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'my-app'
 
-  - name: Run Bandit Security Scan
-    run: |
-      bandit -r app/ || true
+      - name: Run Bandit Security Scan
+        run: |
+          bandit -r app/ || true
